@@ -74,7 +74,6 @@
   
   * 默认值：无
   
-> 建议加上  "blockIfQueueFull":true
-  
-
 参考: https://pulsar.apache.org/docs/en/client-libraries-java/#configure-producer
+
+建议加上  "blockIfQueueFull":true

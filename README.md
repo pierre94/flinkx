@@ -341,6 +341,7 @@ reader和writer包括name和parameter，分别表示插件名称和插件参数
 * [Kudu写入插件](docs/kuduwriter.md)
 * [Cassandra写入插件](docs/cassandrawriter.md)
 * [Emqx写入插件](docs/emqxwriter.md)
+* [Pulsar写入插件](docs/pulsarwriter.md)
 
 [断点续传和实时采集功能介绍](docs/restore.md)
 
