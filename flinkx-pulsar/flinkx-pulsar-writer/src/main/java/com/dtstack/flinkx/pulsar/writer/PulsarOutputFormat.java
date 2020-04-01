@@ -24,6 +24,7 @@ import java.util.Map;
 public class PulsarOutputFormat extends BaseRichOutputFormat {
 
     private transient Producer producer;
+    private transient PulsarClient client;
 
     protected String topic;
     protected String pulsarServiceUrl;
@@ -36,9 +37,13 @@ public class PulsarOutputFormat extends BaseRichOutputFormat {
 
     @Override
     protected void openInternal(int taskNumber, int numTasks) throws IOException {
-        PulsarClient client;
+
+
+        LOG.info("topic:{},pulsarServiceUrl:{},token:{},producerSettings:{},tableFields:{}", topic, pulsarServiceUrl, token
+                , producerSettings, tableFields);
 
         if (null != token) {
+            LOG.debug("token length {}", token.length());
             client = PulsarClient.builder()
                     .serviceUrl(pulsarServiceUrl)
                     .authentication(AuthenticationFactory.token(token))
@@ -88,7 +93,7 @@ public class PulsarOutputFormat extends BaseRichOutputFormat {
     }
 
     protected void emit(Map event) throws IOException {
-        producer.send(objectMapper.writeValueAsString(event));
+        producer.sendAsync(objectMapper.writeValueAsString(event));
     }
 
     @Override
@@ -100,5 +105,6 @@ public class PulsarOutputFormat extends BaseRichOutputFormat {
     public void closeInternal() throws IOException {
         LOG.warn("pulsar output closeInternal.");
         producer.close();
+        client.shutdown();
     }
 }
