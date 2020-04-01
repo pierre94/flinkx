@@ -13,7 +13,8 @@
         "writer": {
           "parameter": {
              "producerSettings" : {
-                "producerName":"test-producer"
+                "producerName":"test-producer",
+                "blockIfQueueFull":true
               },
               "topic" : "pulsar_test",
               "pulsarServiceUrl" : "pulsar://127.0.0.1:6650"
@@ -40,7 +41,7 @@
 
 * **name**
   
-  * 描述：插件名，pulsarwriter。
+  * 描述：插件名，pulsarwriter
   
   * 必选：是 
   
@@ -48,7 +49,7 @@
 
 * **topic**
   
-  * 描述：topic。
+  * 描述：topic
   
   * 必选：是
   
@@ -72,5 +73,8 @@
   * 必选：是
   
   * 默认值：无
+  
+> 建议加上  "blockIfQueueFull":true
+  
 
 参考: https://pulsar.apache.org/docs/en/client-libraries-java/#configure-producer
